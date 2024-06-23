@@ -24,7 +24,7 @@ def test1():
     print(res1.shape, res2.shape)
 
 
-if __name__ == '__main__':
+def test2():
     cfg1 = "models/yolo5face/cfgs/yolov5s_face.yaml"
     model1 = Model(cfg1, ch=3, nc=80, anchors=None)  # create
     model1.train()
@@ -40,3 +40,8 @@ if __name__ == '__main__':
     res2 = model2(data)
     for item1, item2 in zip(res1, res2):
         print(item1.shape, item2.shape)
+
+
+if __name__ == '__main__':
+    test1()
+    test2()
