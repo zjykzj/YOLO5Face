@@ -26,7 +26,7 @@
 
 ## 背景
 
-[YOLO5Face](https://arxiv.org/abs/2105.12931)是一个很有趣的工作，它进一步抽象了人脸检测任务，直接采用通用目标检测算法就可以实现很好的人脸检测效果。当然，它还实现5点人脸关键点回归。
+[YOLO5Face](https://arxiv.org/abs/2105.12931)是一个很有趣的工作，它进一步抽象了人脸检测任务，直接采用通用目标检测算法就可以实现很好的人脸检测效果。当然它还实现了5点人脸关键点回归。 基于[ultralytics/yolov5](https://github.com/ultralytics/yolov5)目标检测框架，YOLO5Face可以很方便的应用不同的模型和训练，比如采用轻量网络来实现实时检测，采用大网络来实现更高的检测精度。
 
 注意：当前本仓库最新的实现完全基于[ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0)
 

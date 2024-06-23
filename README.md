@@ -26,7 +26,7 @@
 
 ## Background
 
-[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the face detection task, and can achieve good face detection results by directly using universal object detection algorithms. Of course, it also achieves 5-point facial keypoint regression.
+[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the task of face detection. By directly using a universal object detection algorithm, good face detection results can be achieved. Of course, it also achieves 5-point facial keypoint regression. Based on the [ultralytics/yolov5](https://github.com/ultralytics/yolov5) object detection framework, YOLO5Face can easily apply different models and training, such as using lightweight networks for real-time detection and using large networks for higher detection accuracy.
 
 Note: the latest implementation of YOLO5Face in our warehouse is entirely based on [ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0)
 
