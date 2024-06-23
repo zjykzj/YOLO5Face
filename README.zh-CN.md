@@ -36,6 +36,7 @@
 
 ## 致谢
 
+* [deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 * [zjykzj/YOLOv3](https://github.com/zjykzj/YOLOv3)
 
