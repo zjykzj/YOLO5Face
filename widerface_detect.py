@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 """
-@Time    : 2024/6/20 18:01
+@Time    : 2024/6/22 18:01
 @File    : detect_widerface.py
 @Author  : zj
 @Description:
 
-每个图像文件单独创建txt文件保存，保存格式为：
+Create a separate txt file for each image file and save it in the following format:
 
 ```txt
 < image name i >
@@ -17,9 +17,10 @@
 < face im >
 ```
 
-每个预测框的检测结果是[left, top, width, height, score]
+The detection result for each prediction box is [left, top, width, height, score]
 
-python detect.py --weights ./runs/train/exp/weights/best.pt --source ../datasets/widerface/images/val/ --save-txt --save-conf --device 1
+Usage - Batch testing files:
+    $ python widerface_detect.py --weights ./runs/train/exp4-yolov5s-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
 
 """
 

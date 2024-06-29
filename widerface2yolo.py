@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 
 """
-@Time    : 2024/6/18 20:09
+@Time    : 2024/6/16 20:09
 @File    : widerface2yolo.py
 @Author  : zj
-@Description: 
+@Description:
+
+Usage - Convert the WIDERFACE dataset format to YOLO:
+    $ python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/wider_face_split/wider_face_train_bbx_gt.txt ../datasets/widerface/
+    $ python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt ../datasets/widerface/
+
 """
 
 import os
