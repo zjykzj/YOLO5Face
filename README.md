@@ -69,6 +69,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [Latest News](#latest-news)
 - [Background](#background)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -80,6 +81,10 @@
 - [Thanks](#thanks)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Latest News
+
+* ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0). Training Face Detectors Based on YOLOv5-v7.0 and WIDERFACE Datasets.***
 
 ## Background
 
