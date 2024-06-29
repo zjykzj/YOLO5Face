@@ -72,6 +72,7 @@
 - [背景](#背景)
 - [安装](#安装)
 - [用法](#用法)
+  - [数据](#数据)
   - [训练](#训练)
   - [评估](#评估)
   - [预测](#预测)
@@ -99,6 +100,15 @@ docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc
 ```
 
 ## 用法
+
+### 数据
+
+在[官网](http://shuoyang1213.me/WIDERFACE/)下载WIDERFACE数据集，然后转换数据集格式。
+
+```shell
+python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/wider_face_split/wider_face_train_bbx_gt.txt ../datasets/widerface/
+python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt ../datasets/widerface/
+```
 
 ### 训练
 

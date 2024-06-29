@@ -72,6 +72,7 @@
 - [Background](#background)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Data](#data)
   - [Train](#train)
   - [Eval](#eval)
   - [Predict](#predict)
@@ -99,6 +100,15 @@ docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc
 ```
 
 ## Usage
+
+### Data
+
+Download the WIDERFACE dataset from http://shuoyang1213.me/WIDERFACE/, Then convert WIDERFACE dataset format.
+
+```shell
+python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/wider_face_split/wider_face_train_bbx_gt.txt ../datasets/widerface/
+python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt ../datasets/widerface/
+```
 
 ### Train
 
