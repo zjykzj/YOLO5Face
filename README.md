@@ -41,7 +41,7 @@
   </tr></thead>
 <tbody>
   <tr>
-    <td class="tg-fr9f">Original(deepcam-cn/yolov5-face)</td>
+    <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
     <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
     <td class="tg-zkss">/</td>
     <td class="tg-9y4h">94.33</td>
