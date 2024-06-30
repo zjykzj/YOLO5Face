@@ -6,9 +6,13 @@
 @Author  : zj
 @Description:
 
+Download the WIDERFACE dataset: http://shuoyang1213.me/WIDERFACE/
+
+Download face and keypoint annotations: https://drive.google.com/file/d/1tU_IjyOwGQfGNUvZGwWWM4SwxKp2PUQ8/view?usp=sharing
+
 Usage - Convert the WIDERFACE dataset format to YOLO:
-    $ python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/wider_face_split/wider_face_train_bbx_gt.txt ../datasets/widerface/
-    $ python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt ../datasets/widerface/
+    $ python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/retinaface_gt_v1.1/train/label.txt ../datasets/widerface
+    $ python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/retinaface_gt_v1.1/val/label.txt ../datasets/widerface
 
 """
 
@@ -33,36 +37,42 @@ def parse_args():
     return args
 
 
-def parse_label_file(label_file_path):
-    results = []
-    with open(label_file_path, 'r') as file:
-        while True:
-            # Read the image path
-            image_path_line = file.readline().strip()
-            if not image_path_line:
-                break
+def load_label(file_path, is_train=True):
+    data = []
+    current_image_data = None
 
-            # Read the number of labels
-            num_labels_line = file.readline().strip()
-            num_labels = int(num_labels_line)
-            if num_labels == 0:
-                _ = file.readline().strip()
-                continue
+    with open(file_path, 'r') as file:
+        for line in file:
+            if line.startswith('#'):
+                # 新的图像路径开始
+                if current_image_data is not None:
+                    data.append(current_image_data)
+                image_path = line.strip()[2:]
+                current_image_data = {'image_path': image_path, 'annotations': []}
+            else:
+                parts = line.split(' ')
+                bbox = list(map(int, parts[:4]))
+                if is_train:
+                    # 从第5个元素开始，直到倒数第二个元素，每2个元素形成一个关键点
+                    keypoints = [(float(parts[i]), float(parts[i + 1])) for i in range(4, len(parts) - 1, 3)]
+                    assert len(keypoints) == 5, keypoints
+                    confidence = float(parts[-1])
+                else:
+                    keypoints = [(-1.0, -1.0) for i in range(5)]
+                    confidence = 0.
 
-            # Read bounding boxes
-            bounding_boxes = []
-            for _ in range(num_labels):
-                bbox_line = file.readline().strip()
-                bbox_data = list(map(int, bbox_line.split()))
-                bounding_boxes.append(bbox_data[:4])
+                annotation = {
+                    'bbox': bbox,
+                    'keypoints': keypoints,
+                    'confidence': confidence
+                }
+                current_image_data['annotations'].append(annotation)
 
-            results.append({
-                'image_path': image_path_line,
-                'num_labels': num_labels,
-                'bounding_boxes': bounding_boxes
-            })
+        # 添加最后一个图像的信息
+        if current_image_data is not None:
+            data.append(current_image_data)
 
-    return results
+    return data
 
 
 def main():
@@ -72,12 +82,13 @@ def main():
     img_root = args.image
     label_path = args.label
 
-    if 'val' in label_path:
-        dst_img_root = os.path.join(dst_root, "images/val")
-        dst_label_root = os.path.join(dst_root, "labels/val")
-    else:
+    is_train = 'val' not in label_path
+    if is_train:
         dst_img_root = os.path.join(dst_root, "images/train")
         dst_label_root = os.path.join(dst_root, "labels/train")
+    else:
+        dst_img_root = os.path.join(dst_root, "images/val")
+        dst_label_root = os.path.join(dst_root, "labels/val")
     if not os.path.exists(dst_img_root):
         os.makedirs(dst_img_root)
     if not os.path.exists(dst_label_root):
@@ -88,7 +99,7 @@ def main():
     assert os.path.exists(img_root), img_root
     assert os.path.exists(label_path), label_path
     print(f"Parse {label_path}")
-    results = parse_label_file(label_path)
+    results = load_label(label_path, is_train=is_train)
 
     print(f"Processing {len(results)} images")
     for result in tqdm(results):
@@ -99,14 +110,26 @@ def main():
         height, width, channels = image.shape
 
         labels = []
-        bounding_boxes = result["bounding_boxes"]
-        for box in bounding_boxes:
-            x1, y1, box_w, box_h = box
+        for anno in result['annotations']:
+            label = []
+
+            assert isinstance(anno, dict)
+            x1, y1, box_w, box_h = anno['bbox']
             x_c = 1.0 * (x1 + box_w / 2) / width
             y_c = 1.0 * (y1 + box_h / 2) / height
             box_w = 1.0 * box_w / width
             box_h = 1.0 * box_h / height
-            labels.append([cls_id, x_c, y_c, box_w, box_h])
+            label.extend([cls_id, x_c, y_c, box_w, box_h])
+
+            for point in anno['keypoints']:
+                x, y = point
+                if x > 0:
+                    x = x / width
+                if y > 0:
+                    y = y / height
+                label.extend([x, y])
+
+            labels.append(label)
 
         image_name = os.path.basename(image_path)
         dst_img_path = os.path.join(dst_img_root, image_name)
