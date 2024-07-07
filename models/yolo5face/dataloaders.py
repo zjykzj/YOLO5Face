@@ -28,12 +28,15 @@ from PIL import ExifTags, Image, ImageOps
 from torch.utils.data import DataLoader, Dataset, dataloader, distributed
 from tqdm import tqdm
 
-from utils.augmentations import (Albumentations, augment_hsv, classify_albumentations, classify_transforms, copy_paste,
-                                 letterbox, mixup, random_perspective)
+# from utils.augmentations import (Albumentations, augment_hsv, classify_albumentations, classify_transforms, copy_paste,
+#                                  letterbox, mixup, random_perspective)
 from utils.general import (DATASETS_DIR, LOGGER, NUM_THREADS, TQDM_BAR_FORMAT, check_dataset, check_requirements,
                            check_yaml, clean_str, cv2, is_colab, is_kaggle, segments2boxes, unzip_file, xyn2xy,
                            xywh2xyxy, xywhn2xyxy, xyxy2xywhn)
 from utils.torch_utils import torch_distributed_zero_first
+
+from models.yolo5face.augmentations import (Albumentations, augment_hsv, classify_albumentations, classify_transforms,
+                                            copy_paste, letterbox, mixup, random_perspective)
 
 # Parameters
 HELP_URL = 'See https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data'
@@ -675,15 +678,10 @@ class LoadImagesAndLabels(Dataset):
             labels = self.labels[index].copy()
             if labels.size:  # normalized xywh to pixel xyxy format
                 # labels[:, 1:] = xywhn2xyxy(labels[:, 1:], ratio[0] * w, ratio[1] * h, padw=pad[0], padh=pad[1])
-                labels[:, 1:5] = xywhn2xyxy(labels[:, 1:], ratio[0] * w, ratio[1] * h, padw=pad[0], padh=pad[1])
+                labels[:, 1:5] = xywhn2xyxy(labels[:, 1:5], ratio[0] * w, ratio[1] * h, padw=pad[0], padh=pad[1])
 
-                np_zeros = np.zeros(labels[:, 5::2].shape)
-                mask_x = np.array(labels[:, 5::2] > np_zeros, dtype=np.int32)
-                landmarks_x = labels[:, 5::2] * w + pad[0]
-                labels[:, 5::2] = (landmarks_x * mask_x + mask_x - 1)
-                mask_y = np.array(labels[:, 6::2] > np_zeros, dtype=np.int32)
-                landmarks_y = labels[:, 6::2] * w + pad[0]
-                labels[:, 6::2] = (landmarks_y * mask_y + mask_y - 1)
+                labels[:, 5::2] = np.where(labels[:, 5::2] < 0, -1, labels[:, 5::2] * w + pad[0])
+                labels[:, 6::2] = np.where(labels[:, 6::2] < 0, -1, labels[:, 6::2] * h + pad[1])
 
             if self.augment:
                 img, labels = random_perspective(img,
@@ -698,11 +696,10 @@ class LoadImagesAndLabels(Dataset):
         if nl:
             labels[:, 1:5] = xyxy2xywhn(labels[:, 1:5], w=img.shape[1], h=img.shape[0], clip=True, eps=1E-3)
 
-            labels[:, [5, 7, 9, 11, 13]] /= img.shape[1]  # normalized landmark x 0-1
-            labels[:, [5, 7, 9, 11, 13]] = np.where(labels[:, [5, 7, 9, 11, 13]] < 0, -1, labels[:, [5, 7, 9, 11, 13]])
-            labels[:, [6, 8, 10, 12, 14]] /= img.shape[0]  # normalized landmark y 0-1
-            labels[:, [6, 8, 10, 12, 14]] = np.where(labels[:, [6, 8, 10, 12, 14]] < 0, -1,
-                                                     labels[:, [6, 8, 10, 12, 14]])
+            # normalized landmark x 0-1
+            labels[:, 5::2] = np.where(labels[:, 5::2] < 0, -1, labels[:, 5::2] / img.shape[1])
+            # normalized landmark y 0-1
+            labels[:, 6::2] = np.where(labels[:, 6::2] < 0, -1, labels[:, 6::2] / img.shape[0])
 
         if self.augment:
             # Albumentations
@@ -718,11 +715,7 @@ class LoadImagesAndLabels(Dataset):
                 if nl:
                     labels[:, 2] = 1 - labels[:, 2]
 
-                    labels[:, 6] = np.where(labels[:, 6] < 0, -1, 1 - labels[:, 6])
-                    labels[:, 8] = np.where(labels[:, 8] < 0, -1, 1 - labels[:, 8])
-                    labels[:, 10] = np.where(labels[:, 10] < 0, -1, 1 - labels[:, 10])
-                    labels[:, 12] = np.where(labels[:, 12] < 0, -1, 1 - labels[:, 12])
-                    labels[:, 14] = np.where(labels[:, 14] < 0, -1, 1 - labels[:, 14])
+                    labels[:, 6::2] = np.where(labels[:, 6::2] < 0, -1, 1 - labels[:, 6::2])
 
             # Flip left-right
             if random.random() < hyp['fliplr']:
@@ -730,11 +723,7 @@ class LoadImagesAndLabels(Dataset):
                 if nl:
                     labels[:, 1] = 1 - labels[:, 1]
 
-                labels[:, 5] = np.where(labels[:, 5] < 0, -1, 1 - labels[:, 5])
-                labels[:, 7] = np.where(labels[:, 7] < 0, -1, 1 - labels[:, 7])
-                labels[:, 9] = np.where(labels[:, 9] < 0, -1, 1 - labels[:, 9])
-                labels[:, 11] = np.where(labels[:, 11] < 0, -1, 1 - labels[:, 11])
-                labels[:, 13] = np.where(labels[:, 13] < 0, -1, 1 - labels[:, 13])
+                labels[:, 5::2] = np.where(labels[:, 5::2] < 0, -1, 1 - labels[:, 5::2])
 
                 # 左右镜像的时候，左眼、右眼，　左嘴角、右嘴角无法区分, 应该交换位置，便于网络学习
                 eye_left = np.copy(labels[:, [5, 6]])
@@ -815,15 +804,27 @@ class LoadImagesAndLabels(Dataset):
             # Labels
             labels, segments = self.labels[index].copy(), self.segments[index].copy()
             if labels.size:
-                labels[:, 1:] = xywhn2xyxy(labels[:, 1:], w, h, padw, padh)  # normalized xywh to pixel xyxy format
+                # labels[:, 1:] = xywhn2xyxy(labels[:, 1:], w, h, padw, padh)  # normalized xywh to pixel xyxy format
+                labels[:, 1:5] = xywhn2xyxy(labels[:, 1:5], w, h, padw, padh)  # normalized xywh to pixel xyxy format
+
+                labels[:, 5::2] = np.where(labels[:, 5::2] < 0, -1, labels[:, 5::2] * w + padw)
+                labels[:, 6::2] = np.where(labels[:, 6::2] < 0, -1, labels[:, 6::2] * h + padh)
+
                 segments = [xyn2xy(x, w, h, padw, padh) for x in segments]
+
             labels4.append(labels)
             segments4.extend(segments)
 
         # Concat/clip labels
         labels4 = np.concatenate(labels4, 0)
         for x in (labels4[:, 1:], *segments4):
-            np.clip(x, 0, 2 * s, out=x)  # clip when using random_perspective()
+            # np.clip(x, 0, 2 * s, out=x)  # clip when using random_perspective()
+            np.clip(x[:, :4], 0, 2 * s, out=x[:, :4])  # clip when using random_perspective()
+
+            x[:, 4::2] = np.where(x[:, 4::2] < 0, -1, x[:, 4::2])
+            x[:, 4::2] = np.where(x[:, 4::2] > 2 * s, -1, x[:, 4::2])
+            x[:, 5::2] = np.where(x[:, 5::2] < 0, -1, x[:, 5::2])
+            x[:, 5::2] = np.where(x[:, 5::2] > 2 * s, -1, x[:, 5::2])
         # img4, labels4 = replicate(img4, labels4)  # replicate
 
         # Augment
@@ -1054,7 +1055,7 @@ def verify_image_label(args):
             if nl:
                 # assert lb.shape[1] == 5, f'labels require 5 columns, {lb.shape[1]} columns detected'
                 assert lb.shape[1] == (5 + 10), f'labels require 15 columns, {lb.shape[1]} columns detected'
-                assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
+                # assert (lb >= 0).all(), f'negative label values {lb[lb < 0]}'
                 # assert (lb[:, 1:] <= 1).all(), f'non-normalized or out of bounds coordinates {lb[:, 1:][lb[:, 1:] > 1]}'
                 _, i = np.unique(lb, axis=0, return_index=True)
                 if len(i) < nl:  # duplicate row check

@@ -251,7 +251,7 @@ def random_perspective(im,
 
         # filter candidates
         # i = box_candidates(box1=targets[:, 1:5].T * s, box2=new.T, area_thr=0.01 if use_segments else 0.10)
-        i = box_candidates(box1=targets[:, 1:5].T * s, box2=new[:4].T, area_thr=0.01 if use_segments else 0.10)
+        i = box_candidates(box1=targets[:, 1:5].T * s, box2=new[:, :4].T, area_thr=0.01 if use_segments else 0.10)
         targets = targets[i]
         # targets[:, 1:5] = new[i]
         targets[:, 1:(5 + 10)] = new[i]
