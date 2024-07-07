@@ -38,7 +38,7 @@ class StemBlock(nn.Module):
         return out
 
 
-class Detect(nn.Module):
+class FaceDetect(nn.Module):
     # YOLOv5 Detect head for detection models
     stride = None  # strides computed during build
     dynamic = False  # force grid reconstruction
