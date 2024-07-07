@@ -152,6 +152,7 @@ def random_perspective(im,
                        border=(0, 0)):
     # torchvision.transforms.RandomAffine(degrees=(-10, 10), translate=(0.1, 0.1), scale=(0.9, 1.1), shear=(-10, 10))
     # targets = [cls, xyxy]
+    # use targets = [cls, xyxy, landmarks] instead
 
     height = im.shape[0] + border[0] * 2  # shape(h,w,c)
     width = im.shape[1] + border[1] * 2
@@ -215,24 +216,45 @@ def random_perspective(im,
                 new[i] = segment2box(xy, width, height)
 
         else:  # warp boxes
-            xy = np.ones((n * 4, 3))
-            xy[:, :2] = targets[:, [1, 2, 3, 4, 1, 4, 3, 2]].reshape(n * 4, 2)  # x1y1, x2y2, x1y2, x2y1
+            # xy = np.ones((n * 4, 3))
+            # xy[:, :2] = targets[:, [1, 2, 3, 4, 1, 4, 3, 2]].reshape(n * 4, 2)  # x1y1, x2y2, x1y2, x2y1
+            # xy = xy @ M.T  # transform
+            # xy = (xy[:, :2] / xy[:, 2:3] if perspective else xy[:, :2]).reshape(n, 8)  # perspective rescale or affine
+            xy = np.ones((n * (4 + 5), 3))
+            # x1y1, x2y2, x1y2, x2y1, kp1, kp2, kp3, kp4, kp5
+            xy[:, :2] = (
+                targets[:, [1, 2, 3, 4, 1, 4, 3, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]].reshape(n * 9, 2))
             xy = xy @ M.T  # transform
-            xy = (xy[:, :2] / xy[:, 2:3] if perspective else xy[:, :2]).reshape(n, 8)  # perspective rescale or affine
+            xy = (xy[:, :2] / xy[:, 2:3] if perspective else xy[:, :2]).reshape(n, 18)  # perspective rescale or affine
 
             # create new boxes
             x = xy[:, [0, 2, 4, 6]]
             y = xy[:, [1, 3, 5, 7]]
+
+            landmarks = xy[:, [8, 9, 10, 11, 12, 13, 14, 15, 16, 17]]
+            mask_landmarks = np.array(targets[:, 5:15] > 0, dtype=np.int32)
+            landmarks = landmarks * mask_landmarks
+            landmarks = landmarks + mask_landmarks - 1
+
+            landmarks = np.where(landmarks < 0, -1, landmarks)
+            landmarks[:, [0, 2, 4, 6, 8]] = np.where(landmarks[:, [0, 2, 4, 6, 8]] > width, -1,
+                                                     landmarks[:, [0, 2, 4, 6, 8]])
+            landmarks[:, [1, 3, 5, 7, 9]] = np.where(landmarks[:, [1, 3, 5, 7, 9]] > height, -1,
+                                                     landmarks[:, [1, 3, 5, 7, 9]])
+
             new = np.concatenate((x.min(1), y.min(1), x.max(1), y.max(1))).reshape(4, n).T
+            new = np.concatenate((new, landmarks), axis=1)
 
             # clip
             new[:, [0, 2]] = new[:, [0, 2]].clip(0, width)
             new[:, [1, 3]] = new[:, [1, 3]].clip(0, height)
 
         # filter candidates
-        i = box_candidates(box1=targets[:, 1:5].T * s, box2=new.T, area_thr=0.01 if use_segments else 0.10)
+        # i = box_candidates(box1=targets[:, 1:5].T * s, box2=new.T, area_thr=0.01 if use_segments else 0.10)
+        i = box_candidates(box1=targets[:, 1:5].T * s, box2=new[:4].T, area_thr=0.01 if use_segments else 0.10)
         targets = targets[i]
-        targets[:, 1:5] = new[i]
+        # targets[:, 1:5] = new[i]
+        targets[:, 1:(5 + 10)] = new[i]
 
     return im, targets
 
