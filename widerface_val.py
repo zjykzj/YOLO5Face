@@ -37,13 +37,19 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 from models.common import DetectMultiBackend
 from utils.callbacks import Callbacks
-from utils.dataloaders import create_dataloader
+# from utils.dataloaders import create_dataloader
+# from utils.general import (LOGGER, TQDM_BAR_FORMAT, Profile, check_dataset, check_img_size, check_requirements,
+#                            check_yaml, coco80_to_coco91_class, colorstr, increment_path, non_max_suppression,
+#                            print_args, scale_boxes, xywh2xyxy, xyxy2xywh)
 from utils.general import (LOGGER, TQDM_BAR_FORMAT, Profile, check_dataset, check_img_size, check_requirements,
-                           check_yaml, coco80_to_coco91_class, colorstr, increment_path, non_max_suppression,
+                           check_yaml, coco80_to_coco91_class, colorstr, increment_path,
                            print_args, scale_boxes, xywh2xyxy, xyxy2xywh)
 from utils.metrics import ConfusionMatrix, ap_per_class, box_iou
 from utils.plots import output_to_target, plot_images, plot_val_study
 from utils.torch_utils import select_device, smart_inference_mode
+
+from models.yolo5face.dataloaders import create_dataloader
+from models.yolo5face.general import non_max_suppression
 
 
 def save_one_txt(predn, save_conf, shape, file):
@@ -190,7 +196,9 @@ def run(
     s = ('%22s' + '%11s' * 6) % ('Class', 'Images', 'Instances', 'P', 'R', 'mAP50', 'mAP50-95')
     tp, fp, p, r, f1, mp, mr, map50, ap50, map = 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
     dt = Profile(), Profile(), Profile()  # profiling times
-    loss = torch.zeros(3, device=device)
+    # loss = torch.zeros(3, device=device)
+    # box_loss, obj_loss, cls_loss, landmark_loss
+    loss = torch.zeros(4, device=device)
     jdict, stats, ap, ap_class = [], [], [], []
     callbacks.run('on_val_start')
     pbar = tqdm(dataloader, desc=s, bar_format=TQDM_BAR_FORMAT)  # progress bar
@@ -213,6 +221,7 @@ def run(
             loss += compute_loss(train_out, targets)[1]  # box, obj, cls
 
         # NMS
+        targets = targets[:, :6]
         targets[:, 2:] *= torch.tensor((width, height, width, height), device=device)  # to pixels
         lb = [targets[targets[:, 0] == i, 1:] for i in range(nb)] if save_hybrid else []  # for autolabelling
         with dt[2]:
@@ -226,6 +235,8 @@ def run(
 
         # Metrics
         for si, pred in enumerate(preds):
+            pred = pred[:, :(5 + nc)]
+
             labels = targets[targets[:, 0] == si, 1:]
             nl, npr = labels.shape[0], pred.shape[0]  # number of labels, predictions
             path, shape = Path(paths[si]), shapes[si][0]
@@ -278,7 +289,8 @@ def run(
     nt = np.bincount(stats[3].astype(int), minlength=nc)  # number of targets per class
 
     # Print results
-    pf = '%22s' + '%11i' * 2 + '%11.3g' * 4  # print format
+    # pf = '%22s' + '%11i' * 2 + '%11.3g' * 4  # print format
+    pf = '%28s' + '%14i' * 2 + '%14.3g' * 4  # print format
     LOGGER.info(pf % ('all', seen, nt.sum(), mp, mr, map50, map))
     if nt.sum() == 0:
         LOGGER.warning(f'WARNING ⚠️ no labels found in {task} set, can not compute metrics without labels')
