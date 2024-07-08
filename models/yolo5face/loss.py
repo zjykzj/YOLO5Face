@@ -217,7 +217,7 @@ class ComputeLoss:
         lbox *= self.hyp['box']
         lobj *= self.hyp['obj']
         lcls *= self.hyp['cls']
-        lmark *= self.hyp['mark']
+        lmark *= self.hyp['landmark']
         bs = tobj.shape[0]  # batch size
 
         return (lbox + lobj + lcls + lmark) * bs, torch.cat((lbox, lobj, lcls, lmark)).detach()
