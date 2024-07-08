@@ -168,8 +168,9 @@ class ComputeLoss:
             if n:
                 # pxy, pwh, _, pcls = pi[b, a, gj, gi].tensor_split((2, 4, 5), dim=1)  # faster, requires torch 1.8.0
                 # pxy, pwh, _, pcls = pi[b, a, gj, gi].split((2, 2, 1, self.nc), 1)  # target-subset of predictions
-                pxy, pwh, _, plms, pcls = \
-                    pi[b, a, gj, gi].split((2, 2, 1, self.n_landmarks, self.nc), 1)  # target-subset of predictions
+                # [xy, wh, conf, cls, landmarks]
+                pxy, pwh, _, pcls, plms = \
+                    pi[b, a, gj, gi].split((2, 2, 1, self.nc, self.n_landmarks), 1)  # target-subset of predictions
 
                 # Regression
                 pxy = pxy.sigmoid() * 2 - 0.5
@@ -224,10 +225,13 @@ class ComputeLoss:
     def build_targets(self, p, targets):
         # Build targets for compute_loss(), input targets(image,class,x,y,w,h)
         na, nt = self.na, targets.shape[0]  # number of anchors, targets
-        # tcls, tbox, indices, anch = [], [], [], []
-        # gain = torch.ones(7, device=self.device)  # normalized to gridspace gain
+
+        # image_id(1), cls_id(1), xy(2), wh(2), landmarks(10), anchor_idx(1)
         tcls, tbox, tlanmarks, mask_lms, indices, anch = [], [], [], [], [], []
         gain = torch.ones(17, device=self.device)  # normalized to gridspace gain
+        # tcls, tbox, indices, anch = [], [], [], []
+        # gain = torch.ones(7, device=self.device)  # normalized to gridspace gain
+
         ai = torch.arange(na, device=self.device).float().view(na, 1).repeat(1, nt)  # same as .repeat_interleave(nt)
         targets = torch.cat((targets.repeat(na, 1, 1), ai[..., None]), 2)  # append anchor indices
 
