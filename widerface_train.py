@@ -4,15 +4,9 @@ Train a YOLOv5 model on a custom dataset.
 Models and datasets download automatically from the latest YOLOv5 release.
 
 Usage - Single-GPU training:
-    $ python train.py --data coco128.yaml --weights yolov5s.pt --img 640  # from pretrained (recommended)
-    $ python train.py --data coco128.yaml --weights '' --cfg yolov5s.yaml --img 640  # from scratch
+    $ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5s_v7_0.yaml --hyp models/yolo5face/hyps/hyp.scratch-low.yaml --img 640 --epoch 300 --device 0
+    $ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5s_face.yaml --hyp models/yolo5face/hyps/hyp.scratch-origin.yaml --img 640 --epoch 300 --device 0
 
-Usage - Multi-GPU DDP training:
-    $ python -m torch.distributed.run --nproc_per_node 4 --master_port 1 train.py --data coco128.yaml --weights yolov5s.pt --img 640 --device 0,1,2,3
-
-Models:     https://github.com/ultralytics/yolov5/tree/master/models
-Datasets:   https://github.com/ultralytics/yolov5/tree/master/data
-Tutorial:   https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
 """
 
 import argparse
