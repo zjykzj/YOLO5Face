@@ -195,12 +195,9 @@ class ComputeLoss:
                     lcls += self.BCEcls(pcls, t)  # BCE
 
                 # Landmarks
-                plms[:, 0:2] = plms[:, 0:2] * anchors[i]
-                plms[:, 2:4] = plms[:, 2:4] * anchors[i]
-                plms[:, 4:6] = plms[:, 4:6] * anchors[i]
-                plms[:, 6:8] = plms[:, 6:8] * anchors[i]
-                plms[:, 8:10] = plms[:, 8:10] * anchors[i]
-
+                plms_shape = plms.shape
+                plms = plms.reshape(plms_shape[0], -1, 2) * anchors[i].reshape(plms_shape[0], -1, 2)
+                plms = plms.reshape(plms_shape)
                 lmark += self.Lmark(plms, tlms[i], mask_lms[i])
 
                 # Append targets to text file
