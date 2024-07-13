@@ -74,13 +74,8 @@ class FaceDetect(nn.Module):
                 wh = (wh * 2) ** 2 * self.anchor_grid[i]  # wh
 
                 landmarks = landmarks.reshape(bs, self.na, ny, nx, -1, 2) * self.anchor_grid[i][:, :, :, :, None] + \
-                            self.grid[i][:, :, :, :, None] * self.stride[i]
+                            (self.grid[i][:, :, :, :, None] + 0.5) * self.stride[i]
                 landmarks = landmarks.reshape(bs, self.na, ny, nx, -1)
-                # landmarks[..., :2] = landmarks[..., :2] * self.anchor_grid[i] + self.grid[i] * self.stride[i]
-                # landmarks[..., 2:4] = landmarks[..., 2:4] * self.anchor_grid[i] + self.grid[i] * self.stride[i]
-                # landmarks[..., 4:6] = landmarks[..., 4:6] * self.anchor_grid[i] + self.grid[i] * self.stride[i]
-                # landmarks[..., 6:8] = landmarks[..., 6:8] * self.anchor_grid[i] + self.grid[i] * self.stride[i]
-                # landmarks[..., 8:10] = landmarks[..., 8:10] * self.anchor_grid[i] + self.grid[i] * self.stride[i]
 
                 # y = torch.cat((xy, wh, conf), 4)
                 y = torch.cat((xy, wh, conf, cls, landmarks), 4)
