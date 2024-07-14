@@ -1,119 +1,90 @@
 
 # EVAL
 
-Try different combinations of confidence thresholds `--conf-thres` and IOU thresholds `--iou-thres` to evaluate performance on the `WDIER_val` dataset.
-
-1. `0.25 0.45` (detect.py)
-2. `0.001 0.6` (val.py)
-3. `0.02 0.5` (official test_widerface.py)
-
-***Note: maximum detections per image is 1000 here***
-
-## YOLOv5s
+## yolov5s-v7.0 + hyp.scratch-low.yaml + e300
 
 ```shell
-# python widerface_detect.py --weights ./runs/train/exp4-yolov5s-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.25 --iou-thres 0.45 --save-txt --save-conf --device 0
+$ python widerface_detect.py --weights ./runs/exp2-yolov5s_v7_0-i640-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
 ...
-YOLOv5s summary: 157 layers, 7012822 parameters, 0 gradients, 15.8 GFLOPs
-...
-Speed: 0.4ms pre-process, 8.7ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
-Results saved to runs/detect/exp4
-0 labels saved to runs/detect/exp4/labels
-# cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/exp4/labels/ -g ./ground_truth/
-Reading Predictions : 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 364.92it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.51it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.52it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.52it/s]
-==================== Results ====================
-Easy   Val AP: 0.9463598577400709
-Medium Val AP: 0.9197101476218299
-Hard   Val AP: 0.7863305381914243
-=================================================
-```
-
-```shell
-# python widerface_detect.py --weights ./runs/train/exp4-yolov5s-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
-...
-YOLOv5s summary: 157 layers, 7012822 parameters, 0 gradients, 15.8 GFLOPs
+YOLOv5s_v7_0 summary: 157 layers, 7039792 parameters, 0 gradients, 15.8 GFLOPs
 ...
 Speed: 0.3ms pre-process, 9.0ms inference, 0.9ms NMS per image at shape (1, 3, 640, 640)
-Results saved to runs/detect/exp5
-0 labels saved to runs/detect/exp5/labels
-# cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/exp5/labels/ -g ./ground_truth/
-Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 94.45it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.13it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.12it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.13it/s]
+Results saved to runs/detect/exp4
+0 labels saved to runs/detect/exp4/labels
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp4/labels/ -g ./ground_truth/
+Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:01<00:00, 57.64it/s]
+Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  3.05it/s]
+Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  3.03it/s]
+Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  3.02it/s]
 ==================== Results ====================
-Easy   Val AP: 0.9520941964576021
-Medium Val AP: 0.9341770033021547
-Hard   Val AP: 0.8403303849682994
+Easy   Val AP: 0.9461338790996806
+Medium Val AP: 0.9321276330891444
+Hard   Val AP: 0.8514960494506578
 =================================================
 ```
 
 ```shell
-# python widerface_detect.py --weights ./runs/train/exp4-yolov5s-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.02 --iou-thres 0.5 --save-txt --save-conf --device 0
+$ python widerface_detect.py --weights ./runs/exp4-yolov5s_v7_0-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
 ...
-YOLOv5s summary: 157 layers, 7012822 parameters, 0 gradients, 15.8 GFLOPs
+YOLOv5s_v7_0 summary: 157 layers, 7039792 parameters, 0 gradients, 15.8 GFLOPs
 ...
-Speed: 0.4ms pre-process, 8.6ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
-Results saved to runs/detect/exp6
-0 labels saved to runs/detect/exp6/labels
-# cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/exp6/labels/ -g ./ground_truth/
-Reading Predictions : 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 235.19it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.48it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.49it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.48it/s]
-==================== Results ====================
-Easy   Val AP: 0.9513151966498442
-Medium Val AP: 0.931779483781727
-Hard   Val AP: 0.832029703528219
-=================================================
-```
-
-## YOLOv5s-face
-
-```shell
-# python widerface_detect.py --weights ./runs/train/exp-yolov5sface-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
-...
-YOLOv5s_face summary: 171 layers, 7038022 parameters, 0 gradients, 15.1 GFLOPs
-...
-Speed: 0.4ms pre-process, 9.0ms inference, 0.9ms NMS per image at shape (1, 3, 640, 640)
+Speed: 0.4ms pre-process, 8.8ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
 Results saved to runs/detect/exp7
 0 labels saved to runs/detect/exp7/labels
-# cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/exp7/labels/ -g ./ground_truth/
-Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 73.54it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.11it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.11it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.13it/s]
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp7/labels/ -g ./ground_truth/
+Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 62.18it/s]
+Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.94it/s]
+Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.98it/s]
+Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.97it/s]
 ==================== Results ====================
-Easy   Val AP: 0.9433533134678972
-Medium Val AP: 0.9272172318874022
-Hard   Val AP: 0.8447000407897594
+Easy   Val AP: 0.9483604102331251
+Medium Val AP: 0.9328484206418773
+Hard   Val AP: 0.8467345083774318
+=================================================
+```
+
+## yolov5s-face + hyp.scratch.yaml + e300
+
+```shell
+$ python widerface_detect.py --weights ./runs/exp3-yolov5s_face-i640-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
+...
+YOLOv5s_face summary: 171 layers, 7064992 parameters, 0 gradients, 15.2 GFLOPs
+...
+Speed: 0.4ms pre-process, 9.2ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
+Results saved to runs/detect/exp6
+0 labels saved to runs/detect/exp6/labels
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp6/labels/ -g ./ground_truth/
+Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 63.40it/s]
+Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  3.02it/s]
+Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.06it/s]
+Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.07it/s]
+==================== Results ====================
+Easy   Val AP: 0.944292106729655
+Medium Val AP: 0.9288902709524673
+Hard   Val AP: 0.8509110921848383
 =================================================
 ```
 
 ```shell
-# python widerface_detect.py --weights ./runs/train/exp-yolov5sface-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.02 --iou-thres 0.5 --save-txt --save-conf --device 0
+$ python widerface_detect.py --weights ./runs/exp5-yolov5s_face-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
 ...
-YOLOv5s_face summary: 171 layers, 7038022 parameters, 0 gradients, 15.1 GFLOPs
+YOLOv5s_face summary: 171 layers, 7064992 parameters, 0 gradients, 15.2 GFLOPs
 ...
-Speed: 0.4ms pre-process, 9.0ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
+Speed: 0.3ms pre-process, 9.4ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
 Results saved to runs/detect/exp8
 0 labels saved to runs/detect/exp8/labels
-# cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/exp8/labels/ -g ./ground_truth/
-Reading Predictions : 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 215.28it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:18<00:00,  3.36it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.41it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:17<00:00,  3.41it/s]
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp8/labels/ -g ./ground_truth/
+Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 69.88it/s]
+Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  3.03it/s]
+Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.07it/s]
+Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.08it/s]
 ==================== Results ====================
-Easy   Val AP: 0.9422126415903109
-Medium Val AP: 0.9247160188989547
-Hard   Val AP: 0.8386840917524648
+Easy   Val AP: 0.9469263514518231
+Medium Val AP: 0.929978109599129
+Hard   Val AP: 0.8472539843348216
 =================================================
 ```
