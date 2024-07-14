@@ -96,8 +96,7 @@ def create_dataset(is_train=False):
     with open(hyp, errors='ignore') as f:
         hyp = yaml.safe_load(f)  # load hyps dict
 
-    # path = '/home/zj/datasets/widerface/images/train'
-    path = r'C:\zj\repos\datasets\widerface\images\train'
+    path = r'../../datasets/widerface/images/train'
     dataset = LoadImagesAndLabels(path, img_size=640, batch_size=1, augment=is_train, hyp=hyp)
 
     return dataset
@@ -126,7 +125,7 @@ def test_dataloader():
 
     print('*' * 100 + " Eval")
     # valloader
-    val_path = r'C:\zj\repos\datasets\widerface\images\train'
+    val_path = '../../datasets/widerface/images/val'
     val_loader = create_dataloader(val_path,
                                    imgsz,
                                    batch_size,
@@ -142,7 +141,7 @@ def test_dataloader():
 
     print('*' * 100 + " Train")
     # Trainloader
-    train_path = r'C:\zj\repos\datasets\widerface\images\train'
+    train_path = '../../datasets/widerface/images/train'
     train_loader, dataset = create_dataloader(train_path,
                                               imgsz,
                                               batch_size,
