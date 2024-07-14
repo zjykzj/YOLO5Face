@@ -66,6 +66,8 @@
   </tr>
 </tbody></table>
 
+![](./assets/results/selfie.jpg)
+
 ## 内容列表
 
 - [内容列表](#内容列表)
@@ -83,11 +85,14 @@
 
 ## 最近新闻
 
+* ***[2024/07/14][v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0)。增加关键点检测，实现人脸+关键点检测。***
 * ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0)。基于yolov5-v7.0和WIDERFACE数据集训练人脸检测器。***
 
 ## 背景
 
-[YOLO5Face](https://arxiv.org/abs/2105.12931)是一个很有趣的工作，它进一步抽象了人脸检测任务，直接采用通用目标检测算法就可以实现很好的人脸检测效果。当然它还实现了5点人脸关键点回归。 基于[ultralytics/yolov5](https://github.com/ultralytics/yolov5)目标检测框架，YOLO5Face可以很方便的应用不同的模型和训练，比如采用轻量网络来实现实时检测，采用大网络来实现更高的检测精度。
+[YOLO5Face](https://arxiv.org/abs/2105.12931)是一个很有趣的工作，它进一步抽象了人脸检测任务，直接采用通用目标检测算法就可以实现很好的人脸检测效果。当然它还实现了5点人脸关键点回归。
+基于[ultralytics/yolov5](https://github.com/ultralytics/yolov5)
+目标检测框架，YOLO5Face可以很方便的应用不同的模型和训练，比如采用轻量网络来实现实时检测，采用大网络来实现更高的检测精度。
 
 注意：当前本仓库最新的实现完全基于[ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0)
 
@@ -144,8 +149,6 @@ Hard   Val AP: 0.8467345083774318
 ```shell
 $ python detect_face_and_landmarks.py --weights ./runs/exp4-yolov5s_v7_0-i800-e300.pt --source assets/selfie.jpg --imgsz 2048 --conf-thres 0.25 --iou-thres 0.45 --hide-labels --hide-conf
 ```
-
-![](./assets/results/selfie.jpg)
 
 ## 主要维护人员
 

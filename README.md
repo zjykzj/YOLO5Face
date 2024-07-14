@@ -66,6 +66,8 @@
   </tr>
 </tbody></table>
 
+![](./assets/results/selfie.jpg)
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -83,8 +85,8 @@
 
 ## Latest News
 
-* ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0). Training Face Detectors Based on
-  YOLOv5-v7.0 and WIDERFACE Datasets.***
+* ***[2024/07/14][v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0). Add keypoint detection to achieve face+keypoint detection.***
+* ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0). Training Face Detectors Based on YOLOv5-v7.0 and WIDERFACE Datasets.***
 
 ## Background
 
@@ -151,8 +153,6 @@ Hard   Val AP: 0.8467345083774318
 ```shell
 $ python detect_face_and_landmarks.py --weights ./runs/exp4-yolov5s_v7_0-i800-e300.pt --source assets/selfie.jpg --imgsz 2048 --conf-thres 0.25 --iou-thres 0.45 --hide-labels --hide-conf
 ```
-
-![](./assets/results/selfie.jpg)
 
 ## Maintainers
 
