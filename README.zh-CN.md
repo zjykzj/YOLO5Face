@@ -51,18 +51,18 @@
   <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
     <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
-    <td class="tg-vc3l">15.1</td>
-    <td class="tg-9y4h">94.34</td>
-    <td class="tg-c3ow">92.72</td>
-    <td class="tg-c3ow">84.47</td>
+    <td class="tg-vc3l">15.2</td>
+    <td class="tg-9y4h">94.69</td>
+    <td class="tg-c3ow">93.00</td>
+    <td class="tg-c3ow">84.73</td>
   </tr>
   <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-v7.0</span></td>
     <td class="tg-vc3l">15.8</td>
-    <td class="tg-zkss">95.21</td>
-    <td class="tg-vc3l">93.42</td>
-    <td class="tg-vc3l">84.03</td>
+    <td class="tg-zkss">94.84</td>
+    <td class="tg-vc3l">93.28</td>
+    <td class="tg-vc3l">84.67</td>
   </tr>
 </tbody></table>
 
@@ -73,7 +73,6 @@
 - [背景](#背景)
 - [安装](#安装)
 - [用法](#用法)
-  - [数据](#数据)
   - [训练](#训练)
   - [评估](#评估)
   - [预测](#预测)
@@ -106,51 +105,44 @@ docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc
 
 ## 用法
 
-### 数据
-
-在[官网](http://shuoyang1213.me/WIDERFACE/)下载WIDERFACE数据集，然后转换数据集格式。
-
-```shell
-python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/wider_face_split/wider_face_train_bbx_gt.txt ../datasets/widerface/
-python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt ../datasets/widerface/
-```
+关于数据集和标注，查看[widerface2yolo.py](./widerface2yolo.py)
 
 ### 训练
 
 ```shell
-# YOLOv5s
-python3 train.py --data widerface.yaml --weights yolov5s.pt --cfg yolov5s.yaml --imgsz 800 --epoch 250 --device 0
-# YOLOv5s-face
-python3 train.py --data widerface.yaml --weights '' --cfg models/yolo5face/cfgs/yolov5s_face.yaml --hyp models/yolo5face/hyp.scratch.yaml --img 800 --epoch 250 --device 0
+# yolov5s_v7.0
+$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5s_v7_0.yaml --hyp models/yolo5face/hyps/hyp.scratch-low.yaml --img 800 --epoch 300 --device 0
+# yolov5s-face
+$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5s_face.yaml --hyp models/yolo5face/hyps/hyp.scratch.yaml --img 800 --epoch 300 --device 0
 ```
 
 ### 评估
 
 ```shell
-# python widerface_detect.py --weights ./runs/train/exp4-yolov5s-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
+$ python widerface_detect.py --weights ./runs/exp4-yolov5s_v7_0-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
 ...
-YOLOv5s summary: 157 layers, 7012822 parameters, 0 gradients, 15.8 GFLOPs
+YOLOv5s_v7_0 summary: 157 layers, 7039792 parameters, 0 gradients, 15.8 GFLOPs
 ...
-Speed: 0.3ms pre-process, 9.0ms inference, 0.9ms NMS per image at shape (1, 3, 640, 640)
-Results saved to runs/detect/exp5
-0 labels saved to runs/detect/exp5/labels
-# cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/exp5/labels/ -g ./ground_truth/
-Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 94.45it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.13it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.12it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.13it/s]
+Speed: 0.4ms pre-process, 8.8ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
+Results saved to runs/detect/exp7
+0 labels saved to runs/detect/exp7/labels
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp7/labels/ -g ./ground_truth/
+Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 62.18it/s]
+Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.94it/s]
+Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.98it/s]
+Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.97it/s]
 ==================== Results ====================
-Easy   Val AP: 0.9520941964576021
-Medium Val AP: 0.9341770033021547
-Hard   Val AP: 0.8403303849682994
+Easy   Val AP: 0.9483604102331251
+Medium Val AP: 0.9328484206418773
+Hard   Val AP: 0.8467345083774318
 =================================================
 ```
 
 ### 预测
 
 ```shell
-python detect.py --weights ./runs/exp4-yolov5s-e250-img800.pt --source assets/selfie.jpg --imgsz 2048 --conf-thres 0.25 --iou-thres 0.45 --max-det 3000 --hide-labels --hide-conf
+$ python detect_face_and_landmarks.py --weights ./runs/exp4-yolov5s_v7_0-i800-e300.pt --source assets/selfie.jpg --imgsz 2048 --conf-thres 0.25 --iou-thres 0.45 --hide-labels --hide-conf
 ```
 
 ![](./assets/results/selfie.jpg)

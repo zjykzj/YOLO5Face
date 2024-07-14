@@ -51,18 +51,18 @@
   <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
     <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
-    <td class="tg-vc3l">15.1</td>
-    <td class="tg-9y4h">94.34</td>
-    <td class="tg-c3ow">92.72</td>
-    <td class="tg-c3ow">84.47</td>
+    <td class="tg-vc3l">15.2</td>
+    <td class="tg-9y4h">94.69</td>
+    <td class="tg-c3ow">93.00</td>
+    <td class="tg-c3ow">84.73</td>
   </tr>
   <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-v7.0</span></td>
     <td class="tg-vc3l">15.8</td>
-    <td class="tg-zkss">95.21</td>
-    <td class="tg-vc3l">93.42</td>
-    <td class="tg-vc3l">84.03</td>
+    <td class="tg-zkss">94.84</td>
+    <td class="tg-vc3l">93.28</td>
+    <td class="tg-vc3l">84.67</td>
   </tr>
 </tbody></table>
 
@@ -73,7 +73,6 @@
 - [Background](#background)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Data](#data)
   - [Train](#train)
   - [Eval](#eval)
   - [Predict](#predict)
@@ -84,13 +83,20 @@
 
 ## Latest News
 
-* ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0). Training Face Detectors Based on YOLOv5-v7.0 and WIDERFACE Datasets.***
+* ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0). Training Face Detectors Based on
+  YOLOv5-v7.0 and WIDERFACE Datasets.***
 
 ## Background
 
-[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the task of face detection. By directly using a universal object detection algorithm, good face detection results can be achieved. Of course, it also achieves 5-point facial keypoint regression. Based on the [ultralytics/yolov5](https://github.com/ultralytics/yolov5) object detection framework, YOLO5Face can easily apply different models and training, such as using lightweight networks for real-time detection and using large networks for higher detection accuracy.
+[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the task of face
+detection. By directly using a universal object detection algorithm, good face detection results can be achieved. Of
+course, it also achieves 5-point facial keypoint regression. Based on
+the [ultralytics/yolov5](https://github.com/ultralytics/yolov5) object detection framework, YOLO5Face can easily apply
+different models and training, such as using lightweight networks for real-time detection and using large networks for
+higher detection accuracy.
 
-Note: the latest implementation of YOLO5Face in our warehouse is entirely based on [ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0)
+Note: the latest implementation of YOLO5Face in our warehouse is entirely based
+on [ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0)
 
 ## Installation
 
@@ -106,51 +112,44 @@ docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc
 
 ## Usage
 
-### Data
-
-Download the WIDERFACE dataset from http://shuoyang1213.me/WIDERFACE/, Then convert WIDERFACE dataset format.
-
-```shell
-python3 widerface2yolo.py ../datasets/widerface/WIDER_train/images ../datasets/widerface/wider_face_split/wider_face_train_bbx_gt.txt ../datasets/widerface/
-python3 widerface2yolo.py ../datasets/widerface/WIDER_val/images ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt ../datasets/widerface/
-```
+About dataset and annotations, see [widerface2yolo.py](./widerface2yolo.py)
 
 ### Train
 
 ```shell
-# YOLOv5s
-python3 train.py --data widerface.yaml --weights yolov5s.pt --cfg yolov5s.yaml --imgsz 800 --epoch 250 --device 0
-# YOLOv5s-face
-python3 train.py --data widerface.yaml --weights '' --cfg models/yolo5face/cfgs/yolov5s_face.yaml --hyp models/yolo5face/hyp.scratch.yaml --img 800 --epoch 250 --device 0
+# yolov5s_v7.0
+$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5s_v7_0.yaml --hyp models/yolo5face/hyps/hyp.scratch-low.yaml --img 800 --epoch 300 --device 0
+# yolov5s-face
+$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5s_face.yaml --hyp models/yolo5face/hyps/hyp.scratch.yaml --img 800 --epoch 300 --device 0
 ```
 
 ### Eval
 
 ```shell
-# python widerface_detect.py --weights ./runs/train/exp4-yolov5s-e250-img800.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
+$ python widerface_detect.py --weights ./runs/exp4-yolov5s_v7_0-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
 ...
-YOLOv5s summary: 157 layers, 7012822 parameters, 0 gradients, 15.8 GFLOPs
+YOLOv5s_v7_0 summary: 157 layers, 7039792 parameters, 0 gradients, 15.8 GFLOPs
 ...
-Speed: 0.3ms pre-process, 9.0ms inference, 0.9ms NMS per image at shape (1, 3, 640, 640)
-Results saved to runs/detect/exp5
-0 labels saved to runs/detect/exp5/labels
-# cd widerface_evaluate/
-# python3 evaluation.py -p ../runs/detect/exp5/labels/ -g ./ground_truth/
-Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 94.45it/s]
-Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.13it/s]
-Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.12it/s]
-Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:19<00:00,  3.13it/s]
+Speed: 0.4ms pre-process, 8.8ms inference, 0.8ms NMS per image at shape (1, 3, 640, 640)
+Results saved to runs/detect/exp7
+0 labels saved to runs/detect/exp7/labels
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp7/labels/ -g ./ground_truth/
+Reading Predictions : 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:00<00:00, 62.18it/s]
+Processing easy: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.94it/s]
+Processing medium: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.98it/s]
+Processing hard: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████| 61/61 [00:20<00:00,  2.97it/s]
 ==================== Results ====================
-Easy   Val AP: 0.9520941964576021
-Medium Val AP: 0.9341770033021547
-Hard   Val AP: 0.8403303849682994
+Easy   Val AP: 0.9483604102331251
+Medium Val AP: 0.9328484206418773
+Hard   Val AP: 0.8467345083774318
 =================================================
 ```
 
 ### Predict
 
 ```shell
-python detect.py --weights ./runs/exp4-yolov5s-e250-img800.pt --source assets/selfie.jpg --imgsz 2048 --conf-thres 0.25 --iou-thres 0.45 --max-det 3000 --hide-labels --hide-conf
+$ python detect_face_and_landmarks.py --weights ./runs/exp4-yolov5s_v7_0-i800-e300.pt --source assets/selfie.jpg --imgsz 2048 --conf-thres 0.25 --iou-thres 0.45 --hide-labels --hide-conf
 ```
 
 ![](./assets/results/selfie.jpg)
