@@ -33,6 +33,7 @@ import platform
 import sys
 from pathlib import Path
 
+import numpy as np
 import torch
 
 FILE = Path(__file__).resolve()
@@ -128,8 +129,11 @@ def run(
 
         # Inference
         with dt[1]:
+            # print(f"im shape: {im.shape}")
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
             pred = model(im, augment=augment, visualize=visualize)
+            # np.save("assets/widerface/pred/0_Parade_marchingband_1_1004.npy", pred[0].detach().cpu().numpy())
+            # np.save("assets/widerface/pred/10_People_Marching_People_Marching_2_773.npy", pred[0].detach().cpu().numpy())
 
         # NMS
         with dt[2]:
