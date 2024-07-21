@@ -146,7 +146,7 @@ Hard   Val AP: 0.8027201542745954
 ```
 
 ```shell
-$ python widerface_detect.py --weights ./runs/exp2-yolov5n_v7_0_from_scratch-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
+$ python widerface_detect.py --weights ./runs/exp5-yolov5n_v7_0_coco_pretrained-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
 ...
 YOLOv5n_v7_0 summary: 157 layers, 1774048 parameters, 0 gradients, 4.2 GFLOPs
 ...
