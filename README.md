@@ -41,14 +41,6 @@
   </tr></thead>
 <tbody>
   <tr>
-    <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
-    <td class="tg-zkss">/</td>
-    <td class="tg-9y4h">94.33</td>
-    <td class="tg-9y4h">92.61</td>
-    <td class="tg-9y4h">83.15</td>
-  </tr>
-  <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
     <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
     <td class="tg-vc3l">15.2</td>
@@ -58,11 +50,11 @@
   </tr>
   <tr>
     <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
-    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
-    <td class="tg-vc3l">/</td>
-    <td class="tg-zkss">90.76</td>
-    <td class="tg-vc3l">88.12</td>
-    <td class="tg-vc3l">73.82</td>
+    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
+    <td class="tg-zkss">/</td>
+    <td class="tg-9y4h">94.33</td>
+    <td class="tg-9y4h">92.61</td>
+    <td class="tg-9y4h">83.15</td>
   </tr>
   <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
@@ -71,6 +63,14 @@
     <td class="tg-9y4h">90.27</td>
     <td class="tg-c3ow">87.39</td>
     <td class="tg-c3ow">73.60</td>
+  </tr>
+  <tr>
+    <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
+    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
+    <td class="tg-vc3l">/</td>
+    <td class="tg-zkss">90.76</td>
+    <td class="tg-vc3l">88.12</td>
+    <td class="tg-vc3l">73.82</td>
   </tr>
   <tr style="height:20px; background-color:#f2f2f2;">
     <!-- 这里可以不放<td>标签，也可以放空白的<td>标签以保持对齐 -->
