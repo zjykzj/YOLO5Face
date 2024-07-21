@@ -15,16 +15,16 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
-|                | ARCH          | GFLOPs | Easy   | Medium | Hard   |
-|:--------------:|:-------------:|:------:|:------:|:------:|:------:|
-| **zjykzj/YOLO5Face (This)** | yolov5s-face | 15.2   | 94.69 | 93.00 | 84.73  |
-| **deepcam-cn/yolov5-face(Official)** | yolov5s-face | /      | 94.33 | 92.61 | 83.15  |
-| **zjykzj/YOLO5Face (This)** | shufflenetv2-face | 1.5   | 90.27 | 87.39 | 73.60  |
-| **deepcam-cn/yolov5-face(Official)** | shufflenetv2-face | /     | 90.76 | 88.12 | 73.82  |
-|                |               |        |        |        |        |
-| **zjykzj/YOLO5Face (This)** | yolov5x-v7.0 | 204    | **95.79** | **94.53** | **87.63** |
-| **zjykzj/YOLO5Face (This)** | yolov5s-v7.0 | 15.8   | 94.84 | 93.28 | 84.67  |
-| **zjykzj/YOLO5Face (This)** | yolov5n-v7.0 | 4.2    | 93.25 | 91.11 | 80.33  |
+|                                      |       ARCH        | GFLOPs |   Easy    |  Medium   |   Hard    |
+|:------------------------------------:|:-----------------:|:------:|:---------:|:---------:|:---------:|
+|     **zjykzj/YOLO5Face (This)**      |   yolov5s-face    |  15.2  |   94.69   |   93.00   |   84.73   |
+| **deepcam-cn/yolov5-face(Official)** |   yolov5s-face    |   /    |   94.33   |   92.61   |   83.15   |
+|     **zjykzj/YOLO5Face (This)**      | shufflenetv2-face |  1.5   |   90.27   |   87.39   |   73.60   |
+| **deepcam-cn/yolov5-face(Official)** | shufflenetv2-face |   /    |   90.76   |   88.12   |   73.82   |
+|                                      |                   |        |           |           |           |
+|     **zjykzj/YOLO5Face (This)**      |   yolov5x-v7.0    |  204   | **95.79** | **94.53** | **87.63** |
+|     **zjykzj/YOLO5Face (This)**      |   yolov5s-v7.0    |  15.8  |   94.84   |   93.28   |   84.67   |
+|     **zjykzj/YOLO5Face (This)**      |   yolov5n-v7.0    |  4.2   |   93.25   |   91.11   |   80.33   |
 
 ![](./assets/results/selfie.jpg)
 
@@ -45,8 +45,11 @@
 
 ## 新闻🚀🚀🚀
 
-* ***[2024/07/14][v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0)。增加关键点检测，实现人脸+关键点检测。***
-* ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0)。基于yolov5-v7.0和WIDERFACE数据集训练人脸检测器。***
+| 版本                                                                | 发布日期       | 主要更新                                                  |
+|-------------------------------------------------------------------|------------|-------------------------------------------------------|
+| [v1.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.1.0) | 2024/07/21 | 支持更多模型，包括shufflenetv2-face/yolov5x-v7.0/yolov5n-v7.0。 |
+| [v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0) | 2024/07/14 | 增加关键点检测，实现人脸+关键点检测。                                   |
+| [v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0) | 2024/06/29 | 基于yolov5-v7.0和WIDERFACE数据集训练人脸检测器。                    |
 
 ## 背景
 

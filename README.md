@@ -15,16 +15,16 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
-|                | ARCH          | GFLOPs | Easy   | Medium | Hard   |
-|:--------------:|:-------------:|:------:|:------:|:------:|:------:|
-| **zjykzj/YOLO5Face (This)** | yolov5s-face | 15.2   | 94.69 | 93.00 | 84.73  |
-| **deepcam-cn/yolov5-face(Official)** | yolov5s-face | /      | 94.33 | 92.61 | 83.15  |
-| **zjykzj/YOLO5Face (This)** | shufflenetv2-face | 1.5   | 90.27 | 87.39 | 73.60  |
-| **deepcam-cn/yolov5-face(Official)** | shufflenetv2-face | /     | 90.76 | 88.12 | 73.82  |
-|                |               |        |        |        |        |
-| **zjykzj/YOLO5Face (This)** | yolov5x-v7.0 | 204    | **95.79** | **94.53** | **87.63** |
-| **zjykzj/YOLO5Face (This)** | yolov5s-v7.0 | 15.8   | 94.84 | 93.28 | 84.67  |
-| **zjykzj/YOLO5Face (This)** | yolov5n-v7.0 | 4.2    | 93.25 | 91.11 | 80.33  |
+|                                      |       ARCH        | GFLOPs |   Easy    |  Medium   |   Hard    |
+|:------------------------------------:|:-----------------:|:------:|:---------:|:---------:|:---------:|
+|     **zjykzj/YOLO5Face (This)**      |   yolov5s-face    |  15.2  |   94.69   |   93.00   |   84.73   |
+| **deepcam-cn/yolov5-face(Official)** |   yolov5s-face    |   /    |   94.33   |   92.61   |   83.15   |
+|     **zjykzj/YOLO5Face (This)**      | shufflenetv2-face |  1.5   |   90.27   |   87.39   |   73.60   |
+| **deepcam-cn/yolov5-face(Official)** | shufflenetv2-face |   /    |   90.76   |   88.12   |   73.82   |
+|                                      |                   |        |           |           |           |
+|     **zjykzj/YOLO5Face (This)**      |   yolov5x-v7.0    |  204   | **95.79** | **94.53** | **87.63** |
+|     **zjykzj/YOLO5Face (This)**      |   yolov5s-v7.0    |  15.8  |   94.84   |   93.28   |   84.67   |
+|     **zjykzj/YOLO5Face (This)**      |   yolov5n-v7.0    |  4.2   |   93.25   |   91.11   |   80.33   |
 
 ![](./assets/results/selfie.jpg)
 
@@ -45,13 +45,15 @@
 
 ## News🚀🚀🚀
 
-* ***[2024/07/14][v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0). Add keypoint detection to achieve face+keypoint detection.***
-* ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0). Training Face Detectors Based on YOLOv5-v7.0 and WIDERFACE Datasets.***
+| Version                                                           | Release Date | Major Updates                                                                     |
+|-------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------|
+| [v1.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.1.0) | 2024/07/21   | Supports additional models including shufflenetv2-face/yolov5x-v7.0/yolov5n-v7.0. |
+| [v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0) | 2024/07/14   | Adds keypoint detection, enabling face + keypoint detection.                      |
+| [v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0) | 2024/06/29   | Trains a face detector based on yolov5-v7.0 and the WIDERFACE dataset.            |
 
 ## Background
 
-[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the task of face detection. By directly using a universal object detection algorithm, good face detection results can be achieved. Of course, it also achieves 5-point facial keypoint regression. Based on [ultralytics/yolov5](https://github.com/ultralytics/yolov5), YOLO5Face can easily apply different models and training, such as using lightweight networks for real-time detection and using large networks for
-higher detection accuracy.
+[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the task of face detection. By directly using a universal object detection algorithm, good face detection results can be achieved. Of course, it also achieves 5-point facial keypoint regression. Based on [ultralytics/yolov5](https://github.com/ultralytics/yolov5), YOLO5Face can easily apply different models and training, such as using lightweight networks for real-time detection and using large networks for higher detection accuracy.
 
 Note: the latest implementation of YOLO5Face in our warehouse is entirely based on [ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0).
 
