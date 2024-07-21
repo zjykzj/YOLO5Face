@@ -7,6 +7,8 @@
 * Epoches: `300`
 * Model
   * Set1: `yolov5s-face (Official)`
+  * Set5: `shufflenetv2-face (Official)`
+  * Set4: `yolov5x-v7.0 (Custom Face+Keypoints)`
   * Set2: `yolov5s-v7.0 (Custom Face+Keypoints)`
   * Set3: `yolov5n-v7.0 (Custom Face+Keypoints)`
 * ImgSZ
@@ -58,6 +60,48 @@ YOLOv5s_face summary: 171 layers, 7064992 parameters, 0 gradients, 15.2 GFLOPs
                        Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:33
                          all          3226         39707          0.87         0.707         0.783         0.421
 Results saved to runs/train/exp5
+```
+
+## shufflev2-face + hyp.scratch-low.yaml + e300 + img800
+
+```shell
+$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/shufflev2-face.yaml --hyp models/yolo5face/hyps/hyp.scratch-low.yaml --img 800 --epoch 300 --device 0
+         Epoch       GPU_mem      box_loss      obj_loss      cls_loss landmark_loss     Instances          Size
+       299/299          6.6G       0.05001       0.04768             0       0.08396           164           800: 100%|██████████| 805/805 01:44
+                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:17
+                         all          3226         39707         0.841         0.584         0.666         0.334
+
+300 epochs completed in 10.457 hours.
+Optimizer stripped from runs/train/exp/weights/last.pt, 1.3MB
+Optimizer stripped from runs/train/exp/weights/best.pt, 1.3MB
+
+Validating runs/train/exp/weights/best.pt...
+Fusing layers...
+shufflev2-face summary: 278 layers, 446376 parameters, 0 gradients, 1.5 GFLOPs
+                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:29
+                         all          3226         39707         0.841         0.584         0.666         0.334
+Results saved to runs/train/exp
+```
+
+## yolov5x-v7.0 + hyp.scratch-low.yaml + e300 + img800
+
+```shell
+$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5x_v7_0.yaml --hyp models/yolo5face/hyps/hyp.scratch-low.yaml --img 800 --epoch 300 --device 0
+         Epoch       GPU_mem      box_loss      obj_loss      cls_loss landmark_loss     Instances          Size
+       299/299         22.2G       0.04602       0.04323             0       0.05141           164           800: 100%|██████████| 805/805 08:14
+                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:39
+                         all          3226         39707         0.896         0.733         0.812         0.447
+
+300 epochs completed in 44.796 hours.
+Optimizer stripped from runs/train/exp3/weights/last.pt, 173.2MB
+Optimizer stripped from runs/train/exp3/weights/best.pt, 173.2MB
+
+Validating runs/train/exp3/weights/best.pt...
+Fusing layers...
+YOLOv5x_v7_0 summary: 322 layers, 86240704 parameters, 0 gradients, 204.0 GFLOPs
+                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:56
+                         all          3226         39707         0.896         0.733         0.812         0.447
+Results saved to runs/train/exp3
 ```
 
 ## yolov5s-v7.0 + hyp.scratch-low.yaml + e300
@@ -146,46 +190,4 @@ YOLOv5n_v7_0 summary: 157 layers, 1774048 parameters, 0 gradients, 4.2 GFLOPs
                        Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:31
                          all          3226         39707         0.864         0.659         0.736         0.384
 Results saved to runs/train/exp5
-```
-
-## shufflev2-face + hyp.scratch-low.yaml + e300 + img800
-
-```shell
-$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/shufflev2-face.yaml --hyp models/yolo5face/hyps/hyp.scratch-low.yaml --img 800 --epoch 300 --device 0
-         Epoch       GPU_mem      box_loss      obj_loss      cls_loss landmark_loss     Instances          Size
-       299/299          6.6G       0.05001       0.04768             0       0.08396           164           800: 100%|██████████| 805/805 01:44
-                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:17
-                         all          3226         39707         0.841         0.584         0.666         0.334
-
-300 epochs completed in 10.457 hours.
-Optimizer stripped from runs/train/exp/weights/last.pt, 1.3MB
-Optimizer stripped from runs/train/exp/weights/best.pt, 1.3MB
-
-Validating runs/train/exp/weights/best.pt...
-Fusing layers...
-shufflev2-face summary: 278 layers, 446376 parameters, 0 gradients, 1.5 GFLOPs
-                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:29
-                         all          3226         39707         0.841         0.584         0.666         0.334
-Results saved to runs/train/exp
-```
-
-## yolov5x-v7.0 + hyp.scratch-low.yaml + e300 + img800
-
-```shell
-$ python3 widerface_train.py --data widerface.yaml --weights "" --cfg models/yolo5face/cfgs/yolov5x_v7_0.yaml --hyp models/yolo5face/hyps/hyp.scratch-low.yaml --img 800 --epoch 300 --device 0
-         Epoch       GPU_mem      box_loss      obj_loss      cls_loss landmark_loss     Instances          Size
-       299/299         22.2G       0.04602       0.04323             0       0.05141           164           800: 100%|██████████| 805/805 08:14
-                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:39
-                         all          3226         39707         0.896         0.733         0.812         0.447
-
-300 epochs completed in 44.796 hours.
-Optimizer stripped from runs/train/exp3/weights/last.pt, 173.2MB
-Optimizer stripped from runs/train/exp3/weights/best.pt, 173.2MB
-
-Validating runs/train/exp3/weights/best.pt...
-Fusing layers...
-YOLOv5x_v7_0 summary: 322 layers, 86240704 parameters, 0 gradients, 204.0 GFLOPs
-                       Class        Images     Instances             P             R         mAP50      mAP50-95: 100%|██████████| 101/101 00:56
-                         all          3226         39707         0.896         0.733         0.812         0.447
-Results saved to runs/train/exp3
 ```

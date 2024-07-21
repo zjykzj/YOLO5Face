@@ -43,6 +43,46 @@ Hard   Val AP: 0.8472539843348216
 =================================================
 ```
 
+## shufflev2-face + hyp.scratch-low.yaml + e300
+
+```shell
+$ python widerface_detect.py --weights ./runs/exp2-shufflev2_face-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
+...
+shufflev2-face summary: 278 layers, 446376 parameters, 0 gradients, 1.5 GFLOPs
+...
+Speed: 0.4ms pre-process, 9.7ms inference, 1.1ms NMS per image at shape (1, 3, 640, 640)
+Results saved to runs/detect/exp
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp/labels/ -g ./ground_truth/
+...
+...
+==================== Results ====================
+Easy   Val AP: 0.9026281198945639
+Medium Val AP: 0.8739267002391042
+Hard   Val AP: 0.7360179144550214
+=================================================
+```
+
+## yolov5x-v7.0 + hyp.scratch-low.yaml + e300
+
+```shell
+$ python widerface_detect.py --weights ./runs/exp2-shufflev2_face-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
+...
+YOLOv5x_v7_0 summary: 322 layers, 86240704 parameters, 0 gradients, 204.0 GFLOPs
+...
+Speed: 0.3ms pre-process, 18.5ms inference, 0.9ms NMS per image at shape (1, 3, 640, 640)
+Results saved to runs/detect/exp6
+$ cd widerface_evaluate/
+$ python3 evaluation.py -p ../runs/detect/exp6/labels/ -g ./ground_truth/
+...
+...
+==================== Results ====================
+Easy   Val AP: 0.9579026676267521
+Medium Val AP: 0.9453117874661641
+Hard   Val AP: 0.8762927579895387
+=================================================
+```
+
 ## yolov5s-v7.0 + hyp.scratch-low.yaml + e300
 
 ```shell
@@ -120,45 +160,5 @@ $ python3 evaluation.py -p ../runs/detect/exp4/labels/ -g ./ground_truth/
 Easy   Val AP: 0.932553193489898
 Medium Val AP: 0.9110613034833753
 Hard   Val AP: 0.8033370871007046
-=================================================
-```
-
-## yolov5x-v7.0 + hyp.scratch-low.yaml + e300
-
-```shell
-$ python widerface_detect.py --weights ./runs/exp2-shufflev2_face-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
-...
-YOLOv5x_v7_0 summary: 322 layers, 86240704 parameters, 0 gradients, 204.0 GFLOPs
-...
-Speed: 0.3ms pre-process, 18.5ms inference, 0.9ms NMS per image at shape (1, 3, 640, 640)
-Results saved to runs/detect/exp6
-$ cd widerface_evaluate/
-$ python3 evaluation.py -p ../runs/detect/exp6/labels/ -g ./ground_truth/
-...
-...
-==================== Results ====================
-Easy   Val AP: 0.9579026676267521
-Medium Val AP: 0.9453117874661641
-Hard   Val AP: 0.8762927579895387
-=================================================
-```
-
-## shufflev2-face + hyp.scratch-low.yaml + e300
-
-```shell
-$ python widerface_detect.py --weights ./runs/exp2-shufflev2_face-i800-e300.pt --source ../datasets/widerface/images/val/ --folder_pict ../datasets/widerface/wider_face_split/wider_face_val_bbx_gt.txt --conf-thres 0.001 --iou-thres 0.6 --save-txt --save-conf --device 0
-...
-shufflev2-face summary: 278 layers, 446376 parameters, 0 gradients, 1.5 GFLOPs
-...
-Speed: 0.4ms pre-process, 9.7ms inference, 1.1ms NMS per image at shape (1, 3, 640, 640)
-Results saved to runs/detect/exp
-$ cd widerface_evaluate/
-$ python3 evaluation.py -p ../runs/detect/exp/labels/ -g ./ground_truth/
-...
-...
-==================== Results ====================
-Easy   Val AP: 0.9026281198945639
-Medium Val AP: 0.8739267002391042
-Hard   Val AP: 0.7360179144550214
 =================================================
 ```
