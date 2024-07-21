@@ -57,12 +57,47 @@
     <td class="tg-c3ow">84.73</td>
   </tr>
   <tr>
+    <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
+    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
+    <td class="tg-vc3l">/</td>
+    <td class="tg-zkss">90.76</td>
+    <td class="tg-vc3l">88.12</td>
+    <td class="tg-vc3l">73.82</td>
+  </tr>
+  <tr>
+    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
+    <td class="tg-vc3l">1.5</td>
+    <td class="tg-9y4h">90.27</td>
+    <td class="tg-c3ow">87.39</td>
+    <td class="tg-c3ow">73.60</td>
+  </tr>
+  <tr style="height:20px; background-color:#f2f2f2;">
+    <!-- 这里可以不放<td>标签，也可以放空白的<td>标签以保持对齐 -->
+  </tr>
+  <tr>
+    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">yolov5x-v7.0</span></td>
+    <td class="tg-vc3l">204</td>
+    <td class="tg-zkss">95.79</td>
+    <td class="tg-vc3l">94.53</td>
+    <td class="tg-vc3l">87.63</td>
+  </tr>
+  <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
     <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-v7.0</span></td>
     <td class="tg-vc3l">15.8</td>
     <td class="tg-zkss">94.84</td>
     <td class="tg-vc3l">93.28</td>
     <td class="tg-vc3l">84.67</td>
+  </tr>
+  <tr>
+    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">yolov5n-v7.0</span></td>
+    <td class="tg-vc3l">4.2</td>
+    <td class="tg-zkss">93.25</td>
+    <td class="tg-vc3l">91.11</td>
+    <td class="tg-vc3l">80.33</td>
   </tr>
 </tbody></table>
 
@@ -71,7 +106,7 @@
 ## 内容列表
 
 - [内容列表](#内容列表)
-- [最近新闻](#最近新闻)
+- [新闻🚀🚀🚀](#新闻)
 - [背景](#背景)
 - [安装](#安装)
 - [用法](#用法)
@@ -90,9 +125,7 @@
 
 ## 背景
 
-[YOLO5Face](https://arxiv.org/abs/2105.12931)是一个很有趣的工作，它进一步抽象了人脸检测任务，直接采用通用目标检测算法就可以实现很好的人脸检测效果。当然它还实现了5点人脸关键点回归。
-基于[ultralytics/yolov5](https://github.com/ultralytics/yolov5)
-目标检测框架，YOLO5Face可以很方便的应用不同的模型和训练，比如采用轻量网络来实现实时检测，采用大网络来实现更高的检测精度。
+[YOLO5Face](https://arxiv.org/abs/2105.12931)是一个很有趣的工作，它进一步抽象了人脸检测任务，直接采用通用目标检测算法就可以实现很好的人脸检测效果。当然它还实现了5点人脸关键点回归。 基于[ultralytics/yolov5](https://github.com/ultralytics/yolov5)，YOLO5Face可以很方便的应用不同的模型和训练，比如采用轻量网络来实现实时检测，采用大网络来实现更高的检测精度。
 
 注意：当前本仓库最新的实现完全基于[ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0)
 

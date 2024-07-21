@@ -57,12 +57,47 @@
     <td class="tg-c3ow">84.73</td>
   </tr>
   <tr>
+    <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
+    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
+    <td class="tg-vc3l">/</td>
+    <td class="tg-zkss">90.76</td>
+    <td class="tg-vc3l">88.12</td>
+    <td class="tg-vc3l">73.82</td>
+  </tr>
+  <tr>
+    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
+    <td class="tg-vc3l">1.5</td>
+    <td class="tg-9y4h">90.27</td>
+    <td class="tg-c3ow">87.39</td>
+    <td class="tg-c3ow">73.60</td>
+  </tr>
+  <tr style="height:20px; background-color:#f2f2f2;">
+    <!-- 这里可以不放<td>标签，也可以放空白的<td>标签以保持对齐 -->
+  </tr>
+  <tr>
+    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">yolov5x-v7.0</span></td>
+    <td class="tg-vc3l">204</td>
+    <td class="tg-zkss">95.79</td>
+    <td class="tg-vc3l">94.53</td>
+    <td class="tg-vc3l">87.63</td>
+  </tr>
+  <tr>
     <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
     <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-v7.0</span></td>
     <td class="tg-vc3l">15.8</td>
     <td class="tg-zkss">94.84</td>
     <td class="tg-vc3l">93.28</td>
     <td class="tg-vc3l">84.67</td>
+  </tr>
+  <tr>
+    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
+    <td class="tg-zkss"><span style="background-color:#FFF">yolov5n-v7.0</span></td>
+    <td class="tg-vc3l">4.2</td>
+    <td class="tg-zkss">93.25</td>
+    <td class="tg-vc3l">91.11</td>
+    <td class="tg-vc3l">80.33</td>
   </tr>
 </tbody></table>
 
@@ -71,7 +106,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Latest News](#latest-news)
+- [News🚀🚀🚀](#news)
 - [Background](#background)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -90,15 +125,10 @@
 
 ## Background
 
-[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the task of face
-detection. By directly using a universal object detection algorithm, good face detection results can be achieved. Of
-course, it also achieves 5-point facial keypoint regression. Based on
-the [ultralytics/yolov5](https://github.com/ultralytics/yolov5) object detection framework, YOLO5Face can easily apply
-different models and training, such as using lightweight networks for real-time detection and using large networks for
+[YOLO5Face](https://arxiv.org/abs/2105.12931) is a very interesting work that further abstracts the task of face detection. By directly using a universal object detection algorithm, good face detection results can be achieved. Of course, it also achieves 5-point facial keypoint regression. Based on [ultralytics/yolov5](https://github.com/ultralytics/yolov5), YOLO5Face can easily apply different models and training, such as using lightweight networks for real-time detection and using large networks for
 higher detection accuracy.
 
-Note: the latest implementation of YOLO5Face in our warehouse is entirely based
-on [ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0)
+Note: the latest implementation of YOLO5Face in our warehouse is entirely based on [ultralytics/yolov5 v7.0](https://github.com/ultralytics/yolov5/releases/tag/v7.0).
 
 ## Installation
 
