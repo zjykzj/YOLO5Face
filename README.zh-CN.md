@@ -83,7 +83,7 @@
 - [参与贡献方式](#参与贡献方式)
 - [许可证](#许可证)
 
-## 最近新闻
+## 新闻🚀🚀🚀
 
 * ***[2024/07/14][v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0)。增加关键点检测，实现人脸+关键点检测。***
 * ***[2024/06/29][v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0)。基于yolov5-v7.0和WIDERFACE数据集训练人脸检测器。***
