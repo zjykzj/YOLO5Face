@@ -15,91 +15,16 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
-<!-- <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-zkss{background-color:#FFF;border-color:inherit;color:#333;text-align:center;vertical-align:top}
-.tg .tg-vc3l{background-color:#FFF;border-color:inherit;color:#1F2328;text-align:center;vertical-align:top}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-fr9f{background-color:#FFF;border-color:inherit;color:#333;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-jw1t{background-color:#FFF;border-color:inherit;color:#555;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-9y4h{background-color:#FFF;border-color:inherit;color:#1F2328;text-align:center;vertical-align:middle}
-.tg .tg-y5w1{background-color:#FFF;border-color:inherit;color:#00E;font-weight:bold;text-align:center;vertical-align:top}
-</style> -->
-<table class="tg"><thead>
-  <tr>
-    <th class="tg-fr9f"></th>
-    <th class="tg-fr9f">ARCH</th>
-    <th class="tg-fr9f">GFLOPs</th>
-    <th class="tg-jw1t">Easy</th>
-    <th class="tg-7btt">Medium</th>
-    <th class="tg-7btt">Hard</th>
-  </tr></thead>
-<tbody>
-  <tr>
-    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
-    <td class="tg-vc3l">15.2</td>
-    <td class="tg-9y4h">94.69</td>
-    <td class="tg-c3ow">93.00</td>
-    <td class="tg-c3ow">84.73</td>
-  </tr>
-  <tr>
-    <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-face</span></td>
-    <td class="tg-zkss">/</td>
-    <td class="tg-9y4h">94.33</td>
-    <td class="tg-9y4h">92.61</td>
-    <td class="tg-9y4h">83.15</td>
-  </tr>
-  <tr>
-    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
-    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
-    <td class="tg-vc3l">1.5</td>
-    <td class="tg-9y4h">90.27</td>
-    <td class="tg-c3ow">87.39</td>
-    <td class="tg-c3ow">73.60</td>
-  </tr>
-  <tr>
-    <td class="tg-fr9f">deepcam-cn/yolov5-face(Official)</td>
-    <td class="tg-zkss"><span style="background-color:#FFF">shufflenetv2-face</span></td>
-    <td class="tg-vc3l">/</td>
-    <td class="tg-zkss">90.76</td>
-    <td class="tg-vc3l">88.12</td>
-    <td class="tg-vc3l">73.82</td>
-  </tr>
-  <tr style="height:20px; background-color:#f2f2f2;">
-    <!-- 这里可以不放<td>标签，也可以放空白的<td>标签以保持对齐 -->
-  </tr>
-  <tr>
-    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5x-v7.0</span></td>
-    <td class="tg-vc3l">204</td>
-    <td class="tg-zkss">95.79</td>
-    <td class="tg-vc3l">94.53</td>
-    <td class="tg-vc3l">87.63</td>
-  </tr>
-  <tr>
-    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5s-v7.0</span></td>
-    <td class="tg-vc3l">15.8</td>
-    <td class="tg-zkss">94.84</td>
-    <td class="tg-vc3l">93.28</td>
-    <td class="tg-vc3l">84.67</td>
-  </tr>
-  <tr>
-    <td class="tg-y5w1">zjykzj/YOLO5Face<span style="font-weight:700;font-style:normal">(This)</span></td>
-    <td class="tg-zkss"><span style="background-color:#FFF">yolov5n-v7.0</span></td>
-    <td class="tg-vc3l">4.2</td>
-    <td class="tg-zkss">93.25</td>
-    <td class="tg-vc3l">91.11</td>
-    <td class="tg-vc3l">80.33</td>
-  </tr>
-</tbody></table>
+|                | ARCH          | GFLOPs | Easy   | Medium | Hard   |
+|:--------------:|:-------------:|:------:|:------:|:------:|:------:|
+| **zjykzj/YOLO5Face (This)** | yolov5s-face | 15.2   | 94.69 | 93.00 | 84.73  |
+| **deepcam-cn/yolov5-face(Official)** | yolov5s-face | /      | 94.33 | 92.61 | 83.15  |
+| **zjykzj/YOLO5Face (This)** | shufflenetv2-face | 1.5   | 90.27 | 87.39 | 73.60  |
+| **deepcam-cn/yolov5-face(Official)** | shufflenetv2-face | /     | 90.76 | 88.12 | 73.82  |
+|                |               |        |        |        |        |
+| **zjykzj/YOLO5Face (This)** | yolov5x-v7.0 | 204    | **95.79** | **94.53** | **87.63** |
+| **zjykzj/YOLO5Face (This)** | yolov5s-v7.0 | 15.8   | 94.84 | 93.28 | 84.67  |
+| **zjykzj/YOLO5Face (This)** | yolov5n-v7.0 | 4.2    | 93.25 | 91.11 | 80.33  |
 
 ![](./assets/results/selfie.jpg)
 
