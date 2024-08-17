@@ -31,12 +31,12 @@ def test_shufflev2block():
 
     model = ShuffleV2Block(256, 256, 1)
     model.eval()
-    data = torch.randn(2, 128, 640, 640)
+    data = torch.randn(2, 256, 640, 640)
 
     res = model(data)
     print(f"data shape: {data.shape} - res shape: {res.shape}")
 
 
 if __name__ == '__main__':
-    # test_stemblock()
+    test_stemblock()
     test_shufflev2block()
