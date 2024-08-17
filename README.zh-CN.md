@@ -66,12 +66,12 @@ pip3 install -r requirements.txt
 或者使用Docker Container
 
 ```shell
-docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc/localtime -v $(pwd):/workdir --workdir=/workdir --name yolov2 ultralytics/yolov5:latest
+docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc/localtime -v $(pwd):/workdir --workdir=/workdir --name yolo5face ultralytics/yolov5:latest
 ```
 
 ## 用法
 
-关于数据集和标注，查看[widerface2yolo.py](./widerface2yolo.py)
+下载WIDERFACE数据集：[Baidu Drive](https://pan.baidu.com/s/1aHdWgLq1ne_MEr9fkcS7Rg)(08p0)
 
 ### 训练
 
@@ -117,9 +117,10 @@ $ python detect_face_and_landmarks.py --weights ./runs/exp4-yolov5s_v7_0-i800-e3
 
 ## 致谢
 
-* [deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
-* [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 * [zjykzj/YOLOv3](https://github.com/zjykzj/YOLOv3)
+* [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
+* [deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
+* [WIDER FACE: A Face Detection Benchmark](http://shuoyang1213.me/WIDERFACE/)
 
 ## 参与贡献方式
 

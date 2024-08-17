@@ -117,10 +117,10 @@ $ python detect_face_and_landmarks.py --weights ./runs/exp4-yolov5s_v7_0-i800-e3
 
 ## Thanks
 
-* [WIDER FACE: A Face Detection Benchmark](http://shuoyang1213.me/WIDERFACE/)
-* [deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
-* [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 * [zjykzj/YOLOv3](https://github.com/zjykzj/YOLOv3)
+* [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
+* [deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
+* [WIDER FACE: A Face Detection Benchmark](http://shuoyang1213.me/WIDERFACE/)
 
 ## Contributing
 
