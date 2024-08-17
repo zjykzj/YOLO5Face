@@ -15,6 +15,8 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
+ONLINE DEMO：[FACE AND LANDMARKS DETECT](https://blog.zjykzj.cn/gradio/yolo5face/)
+
 |                                      |       ARCH        | GFLOPs |   Easy    |  Medium   |   Hard    |
 |:------------------------------------:|:-----------------:|:------:|:---------:|:---------:|:---------:|
 |     **zjykzj/YOLO5Face (This)**      |   yolov5s-face    |  15.2  |   94.69   |   93.00   |   84.73   |
@@ -47,6 +49,7 @@
 
 | Version                                                           | Release Date | Major Updates                                                                     |
 |-------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------|
+| [v1.1.1](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.1.1) | 2024/08/17   | Update and add Gradio demo.                                                       |
 | [v1.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.1.0) | 2024/07/21   | Supports additional models including shufflenetv2-face/yolov5x-v7.0/yolov5n-v7.0. |
 | [v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0) | 2024/07/14   | Adds keypoint detection, enabling face + keypoint detection.                      |
 | [v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0) | 2024/06/29   | Trains a face detector based on yolov5-v7.0 and the WIDERFACE dataset.            |

@@ -15,6 +15,8 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
+ONLINE DEMO：[FACE AND LANDMARKS DETECT](https://blog.zjykzj.cn/gradio/yolo5face/)
+
 |                                      |       ARCH        | GFLOPs |   Easy    |  Medium   |   Hard    |
 |:------------------------------------:|:-----------------:|:------:|:---------:|:---------:|:---------:|
 |     **zjykzj/YOLO5Face (This)**      |   yolov5s-face    |  15.2  |   94.69   |   93.00   |   84.73   |
@@ -47,6 +49,7 @@
 
 | 版本                                                                | 发布日期       | 主要更新                                                  |
 |-------------------------------------------------------------------|------------|-------------------------------------------------------|
+| [v1.1.1](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.1.1) | 2024/08/17 | 更新YOLO5Face，新增Gradio demo。                            |
 | [v1.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.1.0) | 2024/07/21 | 支持更多模型，包括shufflenetv2-face/yolov5x-v7.0/yolov5n-v7.0。 |
 | [v1.0.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v1.0.0) | 2024/07/14 | 增加关键点检测，实现人脸+关键点检测。                                   |
 | [v0.1.0](https://github.com/zjykzj/YOLO5Face/releases/tag/v0.1.0) | 2024/06/29 | 基于yolov5-v7.0和WIDERFACE数据集训练人脸检测器。                    |
