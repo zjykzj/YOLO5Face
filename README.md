@@ -71,7 +71,7 @@ docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc
 
 ## Usage
 
-About dataset and annotations, see [widerface2yolo.py](./widerface2yolo.py)
+* Download WIDERFACE dataset: [Baidu Drive](https://pan.baidu.com/s/1aHdWgLq1ne_MEr9fkcS7Rg)(08p0)
 
 ### Train
 
@@ -117,6 +117,7 @@ $ python detect_face_and_landmarks.py --weights ./runs/exp4-yolov5s_v7_0-i800-e3
 
 ## Thanks
 
+* [WIDER FACE: A Face Detection Benchmark](http://shuoyang1213.me/WIDERFACE/)
 * [deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
 * [ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 * [zjykzj/YOLOv3](https://github.com/zjykzj/YOLOv3)
