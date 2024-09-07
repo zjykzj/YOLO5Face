@@ -63,13 +63,13 @@ ONLINE DEMO：[FACE AND LANDMARKS DETECT](https://blog.zjykzj.cn/gradio/yolo5fac
 ## 安装
 
 ```shell
-pip3 install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 或者使用Docker Container
 
 ```shell
-docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc/localtime -v $(pwd):/workdir --workdir=/workdir --name yolo5face ultralytics/yolov5:latest
+$ docker run -it --runtime nvidia --gpus=all --shm-size=16g -v /etc/localtime:/etc/localtime -v $(pwd):/workdir --workdir=/workdir --name yolo5face ultralytics/yolov5:v7.0
 ```
 
 ## 用法
