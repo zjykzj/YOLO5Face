@@ -15,6 +15,8 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
+WIDER FACE数据集解析：[WIDER FACE: A Face Detection Benchmark](https://blog.zjykzj.cn/posts/14e0852.html)
+
 ONLINE DEMO：[FACE AND LANDMARKS DETECT](https://blog.zjykzj.cn/gradio/yolo5face/)
 
 |                                      |       ARCH        | GFLOPs |   Easy    |  Medium   |   Hard    |
