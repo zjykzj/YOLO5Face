@@ -15,7 +15,8 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
-WIDER FACE数据集解析：[WIDER FACE: A Face Detection Benchmark](https://blog.zjykzj.cn/posts/14e0852.html)
+1. [YOLO5Face: Why Reinventing a Face Detector](http://blog.zjykzj.cn/posts/2a2133b8.html)
+2. [WIDER FACE: A Face Detection Benchmark](http://blog.zjykzj.cn/posts/14e0852.html)
 
 ONLINE DEMO：[FACE AND LANDMARKS DETECT](https://blog.zjykzj.cn/gradio/yolo5face/)
 
