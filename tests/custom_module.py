@@ -9,6 +9,7 @@
 
 import torch
 
+from utils.torch_utils import profile
 from models.yolo5face.comonents import StemBlock, ShuffleV2Block
 
 
@@ -20,23 +21,29 @@ def test_stemblock():
     res = model(data)
     print(f"data shape: {data.shape} - res shape: {res.shape}")
 
+    profile(data, model)
+
 
 def test_shufflev2block():
-    model = ShuffleV2Block(3, 128, 2)
-    model.eval()
+    m1 = ShuffleV2Block(3, 128, 2)
+    m1.eval()
     data = torch.randn(2, 3, 640, 640)
 
-    res = model(data)
+    res = m1(data)
     print(f"data shape: {data.shape} - res shape: {res.shape}")
 
-    model = ShuffleV2Block(256, 256, 1)
-    model.eval()
+    m2 = ShuffleV2Block(256, 256, 1)
+    m2.eval()
     data = torch.randn(2, 256, 640, 640)
 
-    res = model(data)
+    res = m2(data)
     print(f"data shape: {data.shape} - res shape: {res.shape}")
+
+    profile(data, [m1, m2])
 
 
 if __name__ == '__main__':
+    print(f"*" * 100)
     test_stemblock()
+    print(f"*" * 100)
     test_shufflev2block()

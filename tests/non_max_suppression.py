@@ -56,12 +56,12 @@ def process(pred_path, img_path, im_shape):
 
 def test_nms():
     pred_path_list = [
-        "./tests/pred/0_Parade_marchingband_1_1004.npy",
-        "./tests/pred/10_People_Marching_People_Marching_2_773.npy",
+        "./tests/assets/pred/0_Parade_marchingband_1_1004.npy",
+        "./tests/assets/pred/10_People_Marching_People_Marching_2_773.npy",
     ]
     img_path_list = [
-        "./tests/pred/0_Parade_marchingband_1_1004.jpg",
-        "./tests/pred/10_People_Marching_People_Marching_2_773.jpg",
+        "./tests/assets/pred/0_Parade_marchingband_1_1004.jpg",
+        "./tests/assets/pred/10_People_Marching_People_Marching_2_773.jpg",
     ]
     im_shape_list = [
         [480, 640],
