@@ -21,7 +21,7 @@ def test_stemblock():
     res = model(data)
     print(f"data shape: {data.shape} - res shape: {res.shape}")
 
-    profile(data, model)
+    profile(data, model, n=10)
 
 
 def test_shufflev2block():
@@ -39,7 +39,7 @@ def test_shufflev2block():
     res = m2(data)
     print(f"data shape: {data.shape} - res shape: {res.shape}")
 
-    profile(data, [m1, m2])
+    profile(data, [m1, m2], n=10)
 
 
 if __name__ == '__main__':
