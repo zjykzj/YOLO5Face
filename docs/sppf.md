@@ -3,6 +3,11 @@
 
 From the experimental results, it can be seen that the training effects of setting `SPPF(k=3)` and setting `SPPF(k=5)` are similar.
 
+| Model                  | Easy Val AP | Medium Val AP | Hard Val AP |
+|------------------------| ----------- | ------------- | ----------- |
+| YOLOv5n with SPPF(k=5) | 0.92797     | 0.90772       | 0.80272     |
+| YOLOv5n with SPPF(k=3) | 0.92628     | 0.90603       | 0.80403     |
+
 ## yolov5n-v7.0 with SPPF(k=5) + hyp.scratch-low.yaml + e300 + img800
 
 ### Train
