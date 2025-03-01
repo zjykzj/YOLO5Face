@@ -15,6 +15,8 @@
   <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" alt=""></a>
 </p>
 
+***[zjykzj/YOLO11Face](https://github.com/zjykzj/YOLO11Face) provides implementations of YOLO8Face and YOLO11Face***
+
 ONLINE DEMO：[FACE AND LANDMARKS DETECT](https://blog.zjykzj.cn/gradio/yolo5face/)
 
 |                                      |       ARCH        | GFLOPs |   Easy    |  Medium   |   Hard    |
